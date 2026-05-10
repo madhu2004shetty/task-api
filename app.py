@@ -21,7 +21,23 @@ tasks = []          # List to store tasks
 task_id_counter = 1 # Auto-increment ID for tasks
 
 
-# ─── ENDPOINT 1: POST /login ─────────────────────────────────────────
+# ─── ENDPOINT 1: GET / ─────────────────────────────────────────────
+# Root endpoint - shows API info
+@app.route("/", methods=["GET"])
+def home():
+    return jsonify({
+        "message": "Task Management API",
+        "version": "1.0",
+        "endpoints": {
+            "POST /login": "Get JWT token",
+            "GET /tasks": "List tasks (requires token)",
+            "POST /tasks": "Create task (requires token)",
+            "DELETE /tasks/<id>": "Delete task (requires token)"
+        }
+    }), 200
+
+
+# ─── ENDPOINT 2: POST /login ─────────────────────────────────────────
 @app.route("/login", methods=["POST"])
 def login():
     data = request.get_json()  # Read JSON body from request
