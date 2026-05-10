@@ -32,12 +32,10 @@ jobs:
       # 3. Install app dependencies
       - name: Install dependencies
         run: pip install -r requirements.txt
-        working-directory: task-api
 
       # 4. Run pytest - if any test fails, the pipeline stops here
       - name: Run tests
         run: pytest test_app.py -v
-        working-directory: task-api
 
   # ─── JOB 2: Build Docker Image ─────────────────────────────────────
   # This job only runs AFTER the test job passes
@@ -53,6 +51,5 @@ jobs:
       # Build the Docker image 
       - name: Build Docker image
         run: docker build -t task-api:latest .
-        working-directory: task-api
 
 
